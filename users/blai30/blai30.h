@@ -1,20 +1,3 @@
-/* Copyright 2021 Jonavin Eng @Jonavin
-   Copyright 2022 gourdo1 <jcblake@outlook.com>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #pragma once
 
 // DEFINE MACROS
@@ -27,21 +10,11 @@ enum custom_user_layers {
     _NUMPAD
 };
 
-#define KC_CAD LALT(LCTL(KC_DEL))
-#define KC_AF4 LALT(KC_F4)
-#define KC_TASK LCTL(LSFT(KC_ESC))
-#define CT_PGUP RCTL(KC_PGUP)
-#define CT_PGDN RCTL(KC_PGDN)
-#define CT_HOME RCTL(KC_HOME)
-#define CT_END RCTL(KC_END)
-#define KC_SHIFTSPC LSFT(KC_SPC)
-
 // KEYCODES
 enum custom_user_keycodes {
     ENCFUNC,
     RGB_TOI,       // Timeout idle time up
     RGB_TOD,       // Timeout idle time down
-    KC_TSTOG,      // Tab Scroll Toggle
     NEW_SAFE_RANGE // new safe range for keymap level custom keycodes
 };
 
@@ -69,7 +42,7 @@ void encoder_action_rgb_mode(bool clockwise);
 #define TIMEOUT_THRESHOLD_DEFAULT 15 // default timeout minutes
 #define TIMEOUT_THRESHOLD_MAX 140 // upper limits (2 hours and 10 minutes -- no rgb indicators above this value)
 
-//prototype  functions
+// PROTOTYPE FUNCTIONS
 uint16_t get_timeout_threshold(void);
 void timeout_reset_timer(void);
 void timeout_update_threshold(bool increase);
