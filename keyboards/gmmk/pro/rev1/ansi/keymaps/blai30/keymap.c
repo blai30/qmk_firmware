@@ -48,84 +48,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-#if defined(ENCODER_ENABLE) && !defined(ENCODER_DEFAULTACTIONS_ENABLE) // Encoder Functionality when not using userspace defaults
-void encoder_action_rgbhue(bool clockwise) {
-    if (clockwise) {
-        rgblight_increase_hue_noeeprom();
-    } else {
-        rgblight_decrease_hue_noeeprom();
-    }
-}
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    uint8_t mods_state = get_mods();
-    if (mods_state & MOD_BIT(KC_LSFT)) { // If you are holding L shift, encoder changes layers
-        encoder_action_layerchange(clockwise);
-    } else if (mods_state & MOD_BIT(KC_RSFT)) { // If you are holding R shift, Page up/dn
-        unregister_mods(MOD_BIT(KC_RSFT));
-        encoder_action_navpage(clockwise);
-        register_mods(MOD_BIT(KC_RSFT));
-    } else if (mods_state & MOD_BIT(KC_LCTL)) { // if holding Left Ctrl, navigate next/prev word
-        encoder_action_navword(clockwise);
-    } else if (mods_state & MOD_BIT(KC_RCTL)) { // if holding Right Ctrl, change rgb hue/colour
-        encoder_action_rgbhue(clockwise);
-    } else if (mods_state & MOD_BIT(KC_LALT)) { // if holding Left Alt, change media next/prev track
-        encoder_action_mediatrack(clockwise);
-    } else {
-        switch (get_highest_layer(layer_state)) {
-        case _FN1:
-            #ifdef IDLE_TIMEOUT_ENABLE
-            timeout_update_threshold(clockwise);
-            #endif
-            break;
-        default:
-            encoder_action_volume(clockwise); // Otherwise it just changes volume
-            break;
-        }
-    }
-    //return true; //set to return false to counteract enabled encoder in pro.c
-    return false;
-}
-#endif // ENCODER_ENABLE && !ENCODER_DEFAULTACTIONS_ENABLE
-
 #ifdef RGB_MATRIX_ENABLE
-// Capslock, Scroll lock and Numlock indicator on Left side lights.
+// Caps lock, scroll lock and num lock indicator on left RGB strip.
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    // Scroll Lock RGB setup
-    if (IS_HOST_LED_ON(USB_LED_SCROLL_LOCK)) {
-        rgb_matrix_set_color(LED_L3, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_L4, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_TAB, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_RIGHT, RGB_SPRINGGREEN2);
-    }
-
-    // System NumLock warning indicator RGB setup
-    #ifdef INVERT_NUMLOCK_INDICATOR
-    if (!IS_HOST_LED_ON(USB_LED_NUM_LOCK)) { // on if NUM lock is OFF to bring attention to overlay numpad not functional when enabled
-        rgb_matrix_set_color(LED_GRV, RGB_SPRINGGREEN2);
+    // Num lock indicator RGB setup
+    if (IS_HOST_LED_ON(USB_LED_NUM_LOCK)) {
         rgb_matrix_set_color(LED_L1, RGB_SPRINGGREEN2);
         rgb_matrix_set_color(LED_L2, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_DOWN, RGB_SPRINGGREEN2);
-    }
-    #else
-    if (IS_HOST_LED_ON(USB_LED_NUM_LOCK)) { // Normal, on if NUM lock is ON
+        rgb_matrix_set_color(LED_ESC, RGB_SPRINGGREEN2);
         rgb_matrix_set_color(LED_GRV, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_L1, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_L2, RGB_SPRINGGREEN2);
         rgb_matrix_set_color(LED_DOWN, RGB_SPRINGGREEN2);
     }
-    #endif // INVERT_NUMLOCK_INDICATOR
 
-    // CapsLock RGB setup
+    // Caps lock indicator RGB setup
     if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
         for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_LETTERS); i++) {
             rgb_matrix_set_color(LED_LIST_LETTERS[i], RGB_CHARTREUSE);
         }
-        rgb_matrix_set_color(LED_L7, RGB_CHARTREUSE);
-        rgb_matrix_set_color(LED_L8, RGB_CHARTREUSE);
-        rgb_matrix_set_color(LED_LSFT, RGB_CHARTREUSE);
+        rgb_matrix_set_color(LED_L4, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_L5, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_TAB, RGB_SPRINGGREEN2);
         rgb_matrix_set_color(LED_CAPS, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_LSFT, RGB_SPRINGGREEN2);
         rgb_matrix_set_color(LED_LEFT, RGB_SPRINGGREEN2);
+    }
+
+    // Scroll lock indicator RGB setup
+    if (IS_HOST_LED_ON(USB_LED_SCROLL_LOCK)) {
+        rgb_matrix_set_color(LED_L7, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_L8, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_LCTL, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_RIGHT, RGB_SPRINGGREEN2);
     }
 
     // Fn selector mode RGB setup
@@ -135,10 +88,10 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
             // NEW RGB LIGHTING TO RING KEYBOARD ON FN LAYER ACTIVATION:
             for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_FUNCROW); i++) {
-                rgb_matrix_set_color(LED_LIST_FUNCROW[i], RGB_CYAN);
+                rgb_matrix_set_color(LED_LIST_FUNCROW[i], RGB_RED);
             }
             for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_NUMROW); i++) {
-                rgb_matrix_set_color(LED_LIST_NUMROW[i], RGB_CYAN);
+                rgb_matrix_set_color(LED_LIST_NUMROW[i], RGB_RED);
             }
             rgb_matrix_set_color(LED_BSLS, RGB_RED);
             rgb_matrix_set_color(LED_L1, RGB_RED);
@@ -197,11 +150,11 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 #endif
 
-void keyboard_post_init_keymap(void) {
-    // keyboard_post_init_user() moved to userspace
-    #ifdef RGB_MATRIX_ENABLE
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_PINWHEEL);
-    // Default startup color (hue, sat, val/brightness)
-    rgb_matrix_sethsv_noeeprom(20, 140, 255);
-    #endif
-}
+// void keyboard_post_init_keymap(void) {
+//     // keyboard_post_init_user() moved to userspace
+//     #ifdef RGB_MATRIX_ENABLE
+//     rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_PINWHEEL);
+//     // Default startup color (hue, sat, val/brightness)
+//     rgb_matrix_sethsv_noeeprom(20, 140, 255);
+//     #endif
+// }
