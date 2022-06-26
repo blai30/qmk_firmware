@@ -125,10 +125,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         return true;
     } // exit if the index doesn't match
     uint8_t mods_state = get_mods();
-    if (mods_state & MOD_BIT(KC_LSFT)) {
-        // Holding FN with left shift, change layers.
-        encoder_action_layerchange(clockwise);
-    } else if (mods_state & MOD_BIT(KC_RSFT)) {
+    if (mods_state & MOD_BIT(KC_RSFT)) {
         // Holding FN with right shift, page up/down.
         unregister_mods(MOD_BIT(KC_RSFT));
         encoder_action_navpage(clockwise);
@@ -137,14 +134,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         // Holding FN with right alt, media next/prev track.
         encoder_action_mediatrack(clockwise);
     } else if (mods_state & MOD_BIT(KC_RCTL)) {
-        // Holding FN with right ctrl, adjust RGB brightness.
-        encoder_action_rgb_brightness(clockwise);
+        // Holding FN with right ctrl, change layers.
+        encoder_action_layerchange(clockwise);
     } else {
         switch (get_highest_layer(layer_state)) {
             case _FN1:
-#    ifdef IDLE_TIMEOUT_ENABLE
-                timeout_update_threshold(clockwise);
-#    endif
+                // Holding FN with right ctrl, adjust RGB brightness.
+                encoder_action_rgb_brightness(clockwise);
                 break;
             default:
                 // Otherwise it just changes volume.

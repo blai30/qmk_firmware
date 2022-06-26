@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_FN1] = LAYOUT(
         EE_CLR,  KC_MYCM, KC_WHOM, KC_CALC, KC_MSEL, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, KC_MUTE, KC_VOLD, KC_VOLU, _______, KC_F13,           _______,
-        _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOD, RGB_TOI, _______,          KC_PAUS,
+        _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_PAUS,
         _______, RGB_SAD, RGB_VAI, RGB_SAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_BOOT,          KC_SCRL,
         KC_NUM,  RGB_HUD, RGB_VAD, RGB_HUI, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          KC_PGUP,
         _______,          _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, RGB_MOD, KC_PGDN,
@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, KC_P1,   KC_P2,   KC_P3,   KC_P4,   KC_P5,   KC_P6,   KC_P7,   KC_P8,   KC_P9,   KC_P0,   KC_PMNS, KC_PPLS, _______,          _______,
         _______, KC_PGUP, KC_UP,   KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, _______, _______, _______,          _______,
-        _______, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PAST, _______,          KC_PENT,          _______,
+        KC_NUM,  KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX, KC_P1,   KC_P2,   KC_P3,   KC_PAST, _______,          KC_PENT,          _______,
         _______,          XXXXXXX, _______, _______, _______, XXXXXXX, XXXXXXX, KC_P0,   KC_P0,   KC_PDOT, KC_PSLS,          _______, _______, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
     ),
@@ -53,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // Num lock indicator RGB setup
     if (IS_HOST_LED_ON(USB_LED_NUM_LOCK)) {
-        rgb_matrix_set_color(LED_L1, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_L2, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_ESC, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_GRV, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_DOWN, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_L1, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_L2, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_ESC, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_GRV, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_DOWN, RGB_SPRINGGREEN);
     }
 
     // Caps lock indicator RGB setup
@@ -65,20 +65,20 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_LETTERS); i++) {
             rgb_matrix_set_color(LED_LIST_LETTERS[i], RGB_CHARTREUSE);
         }
-        rgb_matrix_set_color(LED_L4, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_L5, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_TAB, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_CAPS, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_LSFT, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_LEFT, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_L4, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_L5, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_TAB, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_CAPS, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_LSFT, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_LEFT, RGB_SPRINGGREEN);
     }
 
     // Scroll lock indicator RGB setup
     if (IS_HOST_LED_ON(USB_LED_SCROLL_LOCK)) {
-        rgb_matrix_set_color(LED_L7, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_L8, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_LCTL, RGB_SPRINGGREEN2);
-        rgb_matrix_set_color(LED_RIGHT, RGB_SPRINGGREEN2);
+        rgb_matrix_set_color(LED_L7, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_L8, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_LCTL, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_RIGHT, RGB_SPRINGGREEN);
     }
 
     // Fn selector mode RGB setup
@@ -90,58 +90,20 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_FUNCROW); i++) {
                 rgb_matrix_set_color(LED_LIST_FUNCROW[i], RGB_RED);
             }
-            for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_NUMROW); i++) {
-                rgb_matrix_set_color(LED_LIST_NUMROW[i], RGB_RED);
+            for (uint8_t i = 0; i < ARRAYSIZE(LED_SIDE_LEFT); i++) {
+                rgb_matrix_set_color(LED_SIDE_LEFT[i], RGB_RED);
+            }
+            for (uint8_t i = 0; i < ARRAYSIZE(LED_SIDE_RIGHT); i++) {
+                rgb_matrix_set_color(LED_SIDE_RIGHT[i], RGB_RED);
             }
             rgb_matrix_set_color(LED_BSLS, RGB_RED);
-            rgb_matrix_set_color(LED_L1, RGB_RED);
-            rgb_matrix_set_color(LED_L2, RGB_RED);
-            rgb_matrix_set_color(LED_L3, RGB_RED);
-            rgb_matrix_set_color(LED_L4, RGB_RED);
-            rgb_matrix_set_color(LED_L5, RGB_RED);
-            rgb_matrix_set_color(LED_L6, RGB_RED);
-            rgb_matrix_set_color(LED_L7, RGB_RED);
-            rgb_matrix_set_color(LED_L8, RGB_RED);
-            rgb_matrix_set_color(LED_R1, RGB_RED);
-            rgb_matrix_set_color(LED_R2, RGB_RED);
-            rgb_matrix_set_color(LED_R3, RGB_RED);
-            rgb_matrix_set_color(LED_R4, RGB_RED);
-            rgb_matrix_set_color(LED_R5, RGB_RED);
-            rgb_matrix_set_color(LED_R6, RGB_RED);
-            rgb_matrix_set_color(LED_R7, RGB_RED);
-            rgb_matrix_set_color(LED_R8, RGB_RED);
-            rgb_matrix_set_color(LED_MINS, RGB_GREEN);
-            rgb_matrix_set_color(LED_EQL, RGB_GREEN);
-
-            // Add RGB Timeout Indicator -- shows 0 to 139 using F row and num row; larger numbers using 16bit code
-            uint16_t timeout_threshold = get_timeout_threshold();
-            if (timeout_threshold <= 10) {
-                rgb_matrix_set_color(LED_LIST_FUNCROW[timeout_threshold], RGB_YELLOW);
-            } else if (timeout_threshold < 140) {
-                rgb_matrix_set_color(LED_LIST_FUNCROW[(timeout_threshold / 10)], RGB_YELLOW);
-                rgb_matrix_set_color(LED_LIST_NUMROW[(timeout_threshold % 10)], RGB_YELLOW);
-            } else { // >= 140 minutes; max
-                rgb_matrix_set_color(LED_LIST_NUMROW[10], RGB_YELLOW);
-            }
             break;
 
         // Numpad & Mouse Keys overlay RGB
         case _NUMPAD:
             for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_NUMPAD); i++) {
-                rgb_matrix_set_color(LED_LIST_NUMPAD[i], RGB_OFFBLUE);
+                rgb_matrix_set_color(LED_LIST_NUMPAD[i], RGB_BLUE);
             }
-            rgb_matrix_set_color(LED_L5, RGB_OFFBLUE);
-            rgb_matrix_set_color(LED_L6, RGB_OFFBLUE);
-            rgb_matrix_set_color(LED_CAPS, RGB_OFFBLUE);
-            rgb_matrix_set_color(LED_UP, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_DOWN, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_LEFT, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_RIGHT, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_RCTL, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_RSFT, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_END, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_PGUP, RGB_CHARTREUSE);
-            rgb_matrix_set_color(LED_PGDN, RGB_CHARTREUSE);
             break;
 
         default:
@@ -149,12 +111,3 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 #endif
-
-// void keyboard_post_init_keymap(void) {
-//     // keyboard_post_init_user() moved to userspace
-//     #ifdef RGB_MATRIX_ENABLE
-//     rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_PINWHEEL);
-//     // Default startup color (hue, sat, val/brightness)
-//     rgb_matrix_sethsv_noeeprom(20, 140, 255);
-//     #endif
-// }

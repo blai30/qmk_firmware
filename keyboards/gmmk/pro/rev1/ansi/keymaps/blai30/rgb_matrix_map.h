@@ -1,14 +1,4 @@
 #ifdef RGB_MATRIX_ENABLE
-// Custom GMMK Pro-specific RGB color customizations (defaults found in quantum/color.h)
-#define RGB_GODSPEED 0x00, 0xE4, 0xFF     // color for matching keycaps
-#define RGB_NAUTILUS 0x00, 0xA4, 0xA9     // Nautilus Font colors
-#define RGB_OFFBLUE 0x00, 0x80, 0xFF      // new color: blue with a hint of green
-#define RGB_DKRED 0x28, 0x00, 0x00        // new color: dark red
-#define RGB_ORANGE2 0xFF, 0x28, 0x00      // fix: reduced green from 80 to 28
-#define RGB_PURPLE2 0x80, 0x00, 0xFF      // fix: increased red from 7A to 80
-#define RGB_SPRINGGREEN2 0x00, 0xFF, 0x10 // fix: blue was 80, now 10
-#define RGB_YELLOW2 0xFF, 0xB0, 0x00      // fix: green was FF, now B0
-#define RGB_OFF RGB_BLACK
 
 // RGB LED locations
 enum led_location_map {
@@ -225,9 +215,7 @@ const uint8_t LED_LIST_NUMPAD[] = {
     LED_M,
     LED_COMM,
     LED_DOT,
-    LED_SLSH,
-    LED_END,
-    LED_RIGHT
+    LED_SLSH
 };
 
 const uint8_t LED_SIDE_LEFT[] = {
