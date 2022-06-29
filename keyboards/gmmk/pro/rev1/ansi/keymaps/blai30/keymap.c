@@ -53,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // Num lock indicator RGB setup
     if (IS_HOST_LED_ON(USB_LED_NUM_LOCK)) {
-        rgb_matrix_set_color(LED_L1, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_L2, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_ESC, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_GRV, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_DOWN, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_L1, RGB_GREEN);
+        rgb_matrix_set_color(LED_L2, RGB_GREEN);
+        rgb_matrix_set_color(LED_ESC, RGB_GREEN);
+        rgb_matrix_set_color(LED_GRV, RGB_GREEN);
+        rgb_matrix_set_color(LED_DOWN, RGB_GREEN);
     }
 
     // Caps lock indicator RGB setup
@@ -65,20 +65,20 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_LETTERS); i++) {
             rgb_matrix_set_color(LED_LIST_LETTERS[i], RGB_CHARTREUSE);
         }
-        rgb_matrix_set_color(LED_L4, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_L5, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_TAB, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_CAPS, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_LSFT, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_LEFT, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_L4, RGB_GREEN);
+        rgb_matrix_set_color(LED_L5, RGB_GREEN);
+        rgb_matrix_set_color(LED_TAB, RGB_GREEN);
+        rgb_matrix_set_color(LED_CAPS, RGB_GREEN);
+        rgb_matrix_set_color(LED_LSFT, RGB_GREEN);
+        rgb_matrix_set_color(LED_LEFT, RGB_GREEN);
     }
 
     // Scroll lock indicator RGB setup
     if (IS_HOST_LED_ON(USB_LED_SCROLL_LOCK)) {
-        rgb_matrix_set_color(LED_L7, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_L8, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_LCTL, RGB_SPRINGGREEN);
-        rgb_matrix_set_color(LED_RIGHT, RGB_SPRINGGREEN);
+        rgb_matrix_set_color(LED_L7, RGB_GREEN);
+        rgb_matrix_set_color(LED_L8, RGB_GREEN);
+        rgb_matrix_set_color(LED_LCTL, RGB_GREEN);
+        rgb_matrix_set_color(LED_RIGHT, RGB_GREEN);
     }
 
     // Fn selector mode RGB setup
