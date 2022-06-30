@@ -149,7 +149,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else {
         switch (get_highest_layer(layer_state)) {
             case _FN1:
-                // Holding FN with right ctrl, adjust RGB brightness.
+                // Holding FN, adjust RGB brightness.
                 encoder_action_rgb_brightness(clockwise);
                 break;
             default:
